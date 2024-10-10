@@ -11,16 +11,15 @@ get_db_file <- function(dir) {
 
 get_fields <- function(fields) {
   if (is.null(fields)) {
-    fields <- unique(c(
-      ("tools" %:::% ".get_standard_repository_db_fields")(),
-      "MD5sum",
+    fields <- c(
       "SystemRequirements",
       "Built",
       "Published"
-    ))
+    )
   }
+  standard_fields <- ("tools" %:::% ".get_standard_repository_db_fields")()
 
-  unique(c(fields, "File"))
+  unique(c("MD5sum", standard_fields, fields, "File"))
 }
 
 db_env <- new.env()
